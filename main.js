@@ -1,6 +1,7 @@
 var fs = require("fs");
 const path = require("path");
 const HTML = require("./boilerplate");
+const WriteToFile = require("./utils/write-files");
 
 //    TODO
 // 1) get project name from user - DONE
@@ -56,16 +57,23 @@ function generateFilesInDirectories() {
     console.log(err.message);
   });
 
-  let htmlStream = fs.createWriteStream(htmlFile, "UTF-8");
-  htmlStream.write(HTML);
-  htmlStream.close();
-  htmlStream.on("close", () => {
-    console.log("writing html done");
-  });
+  // let htmlStream = fs.createWriteStream(htmlFile, "UTF-8");
+  // htmlStream.write(HTML);
+  // htmlStream.close();
+  // htmlStream.on("close", () => {
+  //   console.log("writing html done");
+  // });
 
-  htmlStream.on("error", err => {
-    console.log(err.message);
-  });
+  // htmlStream.on("error", err => {
+  //   console.log(err.message);
+  // });
+  
+  WriteToFile(htmlFile, HTML)
+
+  // TODO: Make file for css boilerplate
+  const CSS = "body \{\
+    color: black } "
+  WriteToFile(cssFile, CSS)
 }
 
 //check if root directory already exists
